@@ -43,6 +43,9 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                 var gelenOperators = Operators.fromJson(nesne);
 
                 operatorlistesi.add(gelenOperators);
+                operatorlistesi.sort(
+                  (a, b) => a.operator_type.compareTo(b.operator_type),
+                );
               });
               return Padding(
                 padding: const EdgeInsets.all(8.0),

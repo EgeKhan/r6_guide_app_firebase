@@ -38,13 +38,13 @@ class _WeaponsScreenState extends State<WeaponsScreen> {
                 var gelenWeapons = Weapons.fromJson(nesne);
 
                 weaponsListesi.add(gelenWeapons);
-                
+                weaponsListesi.sort(
+                  (a, b) => a.type.compareTo(b.type),
+                );
               });
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, childAspectRatio: 120 / 150),
+                child: ListView.builder(
                   itemCount: weaponsListesi.length,
                   itemBuilder: (context, index) {
                     var weapons = weaponsListesi[index];
