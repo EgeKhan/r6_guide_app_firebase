@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.blueGrey[100],
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: const Text('Merhaba R6 GuideApp Firebase'),
+          title: const Text('Rainbow Six: Siege GuideAPP'),
         ),
         body: Column(
           children: [
