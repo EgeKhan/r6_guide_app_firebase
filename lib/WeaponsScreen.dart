@@ -38,6 +38,7 @@ class _WeaponsScreenState extends State<WeaponsScreen> {
                 var gelenWeapons = Weapons.fromJson(nesne);
 
                 weaponsListesi.add(gelenWeapons);
+                
               });
               return Padding(
                 padding: const EdgeInsets.all(8.0),
