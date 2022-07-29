@@ -68,7 +68,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                   FittedBox(
                                       child: Text(operators.operator_nickName)),
                                   SizedBox(
-                                      height: 120,
+                                      height: 100,
                                       child: Image.network(
                                           operators.operator_icon)),
                                   FittedBox(
