@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:r6_guide_app_firebase/MainPage.dart';
+import 'package:r6_guide_app_firebase/OperatorDetail.dart';
 import 'package:r6_guide_app_firebase/Operators.dart';
 
 class OperatorsScreen extends StatefulWidget {
@@ -59,7 +60,19 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                     itemBuilder: (context, index) {
                       var operators = operatorlistesi[index];
                       return GestureDetector(
-                        onTap: null,
+                        onTap: (() => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OperatorDetail(
+                                    operators.operator_bio,
+                                    operators.operator_name,
+                                    operators.operator_nickName,
+                                    operators.operator_type,
+                                    operators.operator_org,
+                                    operators.operator_height,
+                                    operators.operator_weight,
+                                    operators.operator_dob,
+                                    operators.operator_birthPlace)))),
                         child: Card(
                           child: SizedBox(
                             child: Padding(

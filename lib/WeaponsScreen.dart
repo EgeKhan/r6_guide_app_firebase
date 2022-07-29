@@ -51,19 +51,23 @@ class _WeaponsScreenState extends State<WeaponsScreen> {
                     return GestureDetector(
                       onTap: null,
                       child: Card(
+                        elevation: 20,
+                        shadowColor: Colors.red,
                         child: SizedBox(
                           child: Padding(
-                            padding: const EdgeInsets.all(0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 FittedBox(
                                   child: Text(weapons.weaponName),
                                 ),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   height: 100,
                                   child: Image.network(weapons.weaponIcon),
                                 ),
+                                const SizedBox(height: 10),
                                 FittedBox(
                                   child: Text(weapons.type),
                                 )
