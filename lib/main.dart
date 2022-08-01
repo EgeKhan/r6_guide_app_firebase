@@ -9,6 +9,7 @@ import 'package:r6_guide_app_firebase/MainPage.dart';
 import 'package:r6_guide_app_firebase/PatchNotes.dart';
 import 'package:r6_guide_app_firebase/Weapons.dart';
 
+import 'AdminPage.dart';
 import 'Operators.dart';
 
 void main() async {
@@ -46,78 +47,6 @@ class _MyAppState extends State<MyApp> {
     refOperators.push().set(bilgi);
   }*/
 
-  Future<void> tumPatchNotes() async {
-    refPatchNotes.onValue.listen((event) {
-      var gelenDegerler = event.snapshot.value as dynamic;
-      if (gelenDegerler != null) {
-        gelenDegerler.forEach((key, nesne) {
-          var gelenPathcNotes = PatchNotes.fromJson(nesne);
-
-          debugPrint("**************\n");
-          debugPrint("PatchNote Key: $key");
-          debugPrint("PatchNote Details: ${gelenPathcNotes.patchNoteDetails}");
-          debugPrint(
-              "PatchNote Release Date: ${gelenPathcNotes.patchNoteReleaseDate}");
-          debugPrint("PatchNote Version: ${gelenPathcNotes.patchNoteVersion}");
-          debugPrint("PatchNote Steam Size: ${gelenPathcNotes.patchNoteSteam}");
-          debugPrint("PatchNote UC Size: ${gelenPathcNotes.patchNoteUC}\n");
-        });
-      }
-    });
-  }
-
-  Future<void> tumSilahlar() async {
-    refWeapons.onValue.listen((event) {
-      var gelenDegerler = event.snapshot.value as dynamic;
-      if (gelenDegerler != null) {
-        gelenDegerler.forEach((key, nesne) {
-          var gelenSilahlar = Weapons.fromJson(nesne);
-
-          debugPrint("**************\n");
-          debugPrint("Weapon Key: $key");
-          debugPrint("Weapon Name: ${gelenSilahlar.weaponName}");
-          debugPrint("Weapon Type: ${gelenSilahlar.type}");
-          debugPrint("Weapon Damage: ${gelenSilahlar.damage}");
-          debugPrint(
-              "Weapon Suppressed Damage: ${gelenSilahlar.suppressedDamage}");
-          debugPrint("Weapon ROF: ${gelenSilahlar.rof}");
-          debugPrint("Weapon Magazine: ${gelenSilahlar.magazine}");
-          debugPrint("Weapon Operators: ${gelenSilahlar.operators}");
-          debugPrint("Weapon Icon: ${gelenSilahlar.weaponIcon}\n");
-        });
-      }
-    });
-  }
-
-  Future<void> tumKisiler() async {
-    refOperators.onValue.listen(
-      (event) {
-        var gelenDegerler = event.snapshot.value as dynamic;
-
-        if (gelenDegerler != null) {
-          gelenDegerler.forEach(
-            (key, nesne) {
-              var gelenKisi = Operators.fromJson(nesne);
-
-              debugPrint("************\n");
-              debugPrint("Key: $key");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_bio}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_birthPlace}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_dob}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_height}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_weight}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_icon}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_org}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_nickName}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_name}");
-              debugPrint("Kisi Ad: ${gelenKisi.operator_type}\n");
-            },
-          );
-        }
-      },
-    );
-  }
-
   @override
   void initState() {
     super.initState();
@@ -130,9 +59,62 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    var adminId = 'kaansnbkr';
+    var adminPsw = '13931393';
+
+    var kullaniciId = "Eksnbkr09";
+    var kullaniciPsw = "123123123";
+
+    var tfKullaniciId = TextEditingController();
+    var tfKullaniciPsw = TextEditingController();
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: const Text('LogIn Page'),
+        ),
+        body: Builder(builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextField(
+                    controller: tfKullaniciId,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Kullanıcı Adı: ')),
+                TextField(
+                  controller: tfKullaniciPsw,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Password: '),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (tfKullaniciId.text == adminId &&
+                          tfKullaniciPsw.text == adminPsw) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AdminPageScreen()));
+                      } else if (tfKullaniciId.text == kullaniciId &&
+                          tfKullaniciPsw.text == kullaniciPsw) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainPage()));
+                      } else {
+                        debugPrint(
+                            "Yanlış kullanıcı veya şifre girişi yaptınız");
+                      }
+                    },
+                    child: const Text('Giriş Yap'))
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }

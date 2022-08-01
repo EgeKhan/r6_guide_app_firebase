@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:r6_guide_app_firebase/EklemeSayfasi.dart';
 import 'package:r6_guide_app_firebase/Operators.dart';
 
 import 'MapsScreen.dart';
@@ -27,8 +28,25 @@ class _MainPageState extends State<MainPage> {
       home: Scaffold(
         backgroundColor: Colors.blueGrey[100],
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back),
+          ),
           backgroundColor: Colors.red,
           title: const Text('Rainbow Six: Siege GuideAPP'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EklemeSayfasi()));
+                },
+                child: const Text(
+                  'EKLE',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ))
+          ],
         ),
         body: Column(
           children: [
