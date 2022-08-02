@@ -4,16 +4,16 @@ import 'dart:collection';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:r6_guide_app_firebase/OperatorsScreen.dart';
+import 'package:r6_guide_app_firebase/admin/AdminOperatorsSayfasi.dart';
 
-class EklemeSayfasi extends StatefulWidget {
-  const EklemeSayfasi({Key? key}) : super(key: key);
+class AdminEklemeSayfasi extends StatefulWidget {
+  const AdminEklemeSayfasi({Key? key}) : super(key: key);
 
   @override
-  State<EklemeSayfasi> createState() => _EklemeSayfasiState();
+  State<AdminEklemeSayfasi> createState() => _AdminEklemeSayfasiState();
 }
 
-class _EklemeSayfasiState extends State<EklemeSayfasi> {
+class _AdminEklemeSayfasiState extends State<AdminEklemeSayfasi> {
   var tfBio = TextEditingController();
   var tfBirthPlace = TextEditingController();
   var tfDob = TextEditingController();
@@ -60,7 +60,7 @@ class _EklemeSayfasiState extends State<EklemeSayfasi> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OperatorsScreen()));
+                        builder: (context) => const AdminOperatorsSayfasi()));
               },
               icon: const Icon(
                 Icons.add_circle_outline,

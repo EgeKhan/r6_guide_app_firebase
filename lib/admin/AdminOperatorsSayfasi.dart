@@ -2,8 +2,10 @@
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:r6_guide_app_firebase/EklemeSayfasi.dart';
+import 'package:r6_guide_app_firebase/OperatorDetail.dart';
 import 'package:r6_guide_app_firebase/Operators.dart';
+
+import 'AdminEklemeSayfasi.dart';
 
 class AdminOperatorsSayfasi extends StatefulWidget {
   const AdminOperatorsSayfasi({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class _AdminOperatorsSayfasiState extends State<AdminOperatorsSayfasi> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const EklemeSayfasi(),
+                    builder: (context) => const AdminEklemeSayfasi(),
                   ),
                 );
               },
@@ -49,53 +51,98 @@ class _AdminOperatorsSayfasiState extends State<AdminOperatorsSayfasi> {
         body: StreamBuilder<DatabaseEvent>(
           stream: refAdminOperators.onValue,
           builder: (context, event) {
-            var adminOperatorListesi = <Operators>[];
+            var operatorlistesi = <Operators>[];
 
             var gelenDegerler = event.data?.snapshot.value as dynamic;
 
             if (gelenDegerler != null) {
               gelenDegerler.forEach((key, nesne) {
-                var adminGelenOperators = Operators.fromJson(nesne);
+                var gelenOperators = Operators.fromJson(nesne);
 
-                adminOperatorListesi.add(adminGelenOperators);
-                adminOperatorListesi.sort(
-                    ((a, b) => a.operator_type.compareTo(b.operator_type)));
+                operatorlistesi.add(gelenOperators);
+                operatorlistesi.sort(
+                  (a, b) => a.operator_type.compareTo(b.operator_type),
+                );
               });
               return Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  itemCount: adminOperatorListesi.length,
-                  itemBuilder: (context, index) {
-                    var adminOperators = adminOperatorListesi[index];
-                    return GestureDetector(
-                      onTap: null,
-                      child: Card(
-                        child: SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 50,
-                                  child: FittedBox(
+                    itemCount: operatorlistesi.length,
+                    itemBuilder: (context, index) {
+                      var adminOperators = operatorlistesi[index];
+                      return GestureDetector(
+                        onTap: (() => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OperatorDetail(
+                                    adminOperators.operator_bio,
+                                    adminOperators.operator_name,
+                                    adminOperators.operator_nickName,
+                                    adminOperators.operator_type,
+                                    adminOperators.operator_org,
+                                    adminOperators.operator_height,
+                                    adminOperators.operator_weight,
+                                    adminOperators.operator_dob,
+                                    adminOperators.operator_birthPlace)))),
+                        child: Card(
+                          child: SizedBox(
+                            child: Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                      height: 100,
                                       child: Image.network(
-                                    adminOperators.operator_icon,
-                                  )),
-                                ),
-                                Column(
-                                  children: [
-                                    Text(adminOperators.operator_name),
-                                    Text(adminOperators.operator_nickName),
-                                  ],
-                                ),
-                              ],
+                                          adminOperators.operator_icon)),
+                                  Column(
+                                    children: [
+                                      FittedBox(
+                                          child: Text(adminOperators
+                                              .operator_nickName)),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      FittedBox(
+                                          child: Text(
+                                              adminOperators.operator_type)),
+                                    ],
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OperatorDetail(
+                                                        adminOperators
+                                                            .operator_bio,
+                                                        adminOperators
+                                                            .operator_name,
+                                                        adminOperators
+                                                            .operator_nickName,
+                                                        adminOperators
+                                                            .operator_type,
+                                                        adminOperators
+                                                            .operator_org,
+                                                        adminOperators
+                                                            .operator_height,
+                                                        adminOperators
+                                                            .operator_weight,
+                                                        adminOperators
+                                                            .operator_dob,
+                                                        adminOperators
+                                                            .operator_birthPlace)));
+                                      },
+                                      icon: const Icon(Icons.remove_red_eye))
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    }),
               );
             } else {
               return const Center();
