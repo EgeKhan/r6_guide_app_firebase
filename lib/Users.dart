@@ -3,12 +3,14 @@
 class Users {
   String kullaniciAd;
   String kullaniciPsw;
-  String kullaniciId = "";
+  String kullaniciId;
+  String kullaniciType;
 
-  Users(this.kullaniciAd, this.kullaniciPsw, this.kullaniciId);
+  Users(this.kullaniciAd, this.kullaniciPsw, this.kullaniciId,
+      this.kullaniciType);
 
-  factory Users.fromJson(Map<dynamic, dynamic> json) {
-    return Users(
-        json["Kullanici Ad"], json["Kullanici Password"], json["Kullanici Id"]);
+  factory Users.fromJson(String key, Map<dynamic, dynamic> json) {
+    return Users(json["Kullanici Ad"], json["Kullanici Password"], key,
+        json["Kullanici Type"]);
   }
 }

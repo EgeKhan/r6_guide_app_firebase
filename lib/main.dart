@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:r6_guide_app_firebase/MainPage.dart';
 import 'package:r6_guide_app_firebase/PatchNotes.dart';
 import 'package:r6_guide_app_firebase/SignUpScreen.dart';
+import 'package:r6_guide_app_firebase/Users.dart';
 import 'package:r6_guide_app_firebase/Weapons.dart';
 
 import 'admin/AdminPage.dart';
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
   var refOperators = FirebaseDatabase.instance.ref().child("Operators");
   var refWeapons = FirebaseDatabase.instance.ref().child("Weapons");
   var refPatchNotes = FirebaseDatabase.instance.ref().child("PatchNotes");
+  var refUsers = FirebaseDatabase.instance.ref().child("Users");
 
   /*Future<void> kisiEkle() async {
     var bilgi = HashMap<String, dynamic>();
@@ -51,6 +53,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
     // kisiEkle();
     // tumKisiler();
     // tumSilahlar();
@@ -60,14 +63,9 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var adminId = 'kaansnbkr';
-    var adminPsw = '13931393';
-
-    var kullaniciId = "Eksnbkr09";
-    var kullaniciPsw = "123123123";
-
-    var tfKullaniciId = TextEditingController();
+    var tfKullaniciAd = TextEditingController();
     var tfKullaniciPsw = TextEditingController();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -82,12 +80,12 @@ class _MyAppState extends State<MyApp> {
               child: Column(
                 children: [
                   TextField(
-                      controller: tfKullaniciId,
+                      controller: tfKullaniciAd,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Kullanıcı Adı: ')),
                   const SizedBox(
-                    height: 50,
+                    height: 10,
                   ),
                   TextField(
                     controller: tfKullaniciPsw,
@@ -98,7 +96,7 @@ class _MyAppState extends State<MyApp> {
                     height: 20,
                   ),
                   InkWell(
-                    child: const Text('Hala Kayıt Olmadınız mı?'),
+                    child: const Text('Kayıt Ol'),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -110,23 +108,42 @@ class _MyAppState extends State<MyApp> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        if (tfKullaniciId.text == adminId &&
-                            tfKullaniciPsw.text == adminPsw) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AdminPageScreen()));
-                        } else if (tfKullaniciId.text == kullaniciId &&
-                            tfKullaniciPsw.text == kullaniciPsw) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MainPage()));
-                        } else {
-                          debugPrint(
-                              "Yanlış kullanıcı veya şifre girişi yaptınız");
-                        }
+                        refUsers.onValue.listen(
+                          (event) {
+                            var gelenDegerler = event.snapshot.value as dynamic;
+                            if (gelenDegerler != null) {
+                              gelenDegerler.forEach(
+                                (key, nesne) {
+                                  var gelenKisi = Users.fromJson(key, nesne);
+
+                                  if (gelenKisi.kullaniciAd ==
+                                          tfKullaniciAd.text &&
+                                      gelenKisi.kullaniciPsw ==
+                                          tfKullaniciPsw.text &&
+                                      gelenKisi.kullaniciType == "Admin") {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AdminPageScreen(),
+                                        ));
+                                  } else if (gelenKisi.kullaniciAd ==
+                                          tfKullaniciAd.text &&
+                                      gelenKisi.kullaniciPsw ==
+                                          tfKullaniciPsw.text &&
+                                      gelenKisi.kullaniciType == "User") {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const MainPage(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              );
+                            }
+                          },
+                        );
                       },
                       child: const Text('Giriş Yap'))
                 ],

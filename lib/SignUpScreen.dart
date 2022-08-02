@@ -1,5 +1,8 @@
 // ignore_for_file: file_names
 
+import 'dart:collection';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class SingUpScreen extends StatefulWidget {
@@ -12,6 +15,7 @@ class SingUpScreen extends StatefulWidget {
 class _SingUpScreenState extends State<SingUpScreen> {
   var tfKullaniciAd = TextEditingController();
   var tfKullaniciPsw = TextEditingController();
+  var refUsers = FirebaseDatabase.instance.ref().child("Users");
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                     border: OutlineInputBorder(), labelText: 'Kullanıcı Adı:'),
               ),
               const SizedBox(
-                height: 50,
+                height: 10,
               ),
               TextField(
                 controller: tfKullaniciPsw,
@@ -47,9 +51,19 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  var bilgi = HashMap<String, dynamic>();
+                  bilgi["Kullanici Ad"] = tfKullaniciAd.text;
+                  bilgi["Kullanici Password"] = tfKullaniciPsw.text;
+                  bilgi["Kullanici Id"] = "";
+                  bilgi["Kullanici Type"] = "User";
+
+                  refUsers.push().set(bilgi);
+
+                  Navigator.pop(context);
+                },
                 child: const Text('Kayıt Ol'),
-              )
+              ),
             ],
           ),
         ),
