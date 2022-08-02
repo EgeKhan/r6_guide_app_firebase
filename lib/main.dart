@@ -7,9 +7,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:r6_guide_app_firebase/MainPage.dart';
 import 'package:r6_guide_app_firebase/PatchNotes.dart';
+import 'package:r6_guide_app_firebase/SignUpScreen.dart';
 import 'package:r6_guide_app_firebase/Weapons.dart';
 
-import 'AdminPage.dart';
+import 'admin/AdminPage.dart';
 import 'Operators.dart';
 
 void main() async {
@@ -74,46 +75,65 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.red,
           title: const Text('LogIn Page'),
         ),
-        body: Builder(builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextField(
-                    controller: tfKullaniciId,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Kullanıcı Adı: ')),
-                TextField(
-                  controller: tfKullaniciPsw,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Password: '),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      if (tfKullaniciId.text == adminId &&
-                          tfKullaniciPsw.text == adminPsw) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AdminPageScreen()));
-                      } else if (tfKullaniciId.text == kullaniciId &&
-                          tfKullaniciPsw.text == kullaniciPsw) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainPage()));
-                      } else {
-                        debugPrint(
-                            "Yanlış kullanıcı veya şifre girişi yaptınız");
-                      }
-                    },
-                    child: const Text('Giriş Yap'))
-              ],
-            ),
-          );
-        }),
+        body: Builder(
+          builder: (context) {
+            return Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextField(
+                      controller: tfKullaniciId,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Kullanıcı Adı: ')),
+                  Column(
+                    children: [
+                      TextField(
+                        controller: tfKullaniciPsw,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password: '),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        child: const Text('Hala Kayıt Olmadınız mı?'),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SingUpScreen()),
+                        ),
+                      )
+                    ],
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (tfKullaniciId.text == adminId &&
+                            tfKullaniciPsw.text == adminPsw) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AdminPageScreen()));
+                        } else if (tfKullaniciId.text == kullaniciId &&
+                            tfKullaniciPsw.text == kullaniciPsw) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MainPage()));
+                        } else {
+                          debugPrint(
+                              "Yanlış kullanıcı veya şifre girişi yaptınız");
+                        }
+                      },
+                      child: const Text('Giriş Yap'))
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
