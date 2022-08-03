@@ -5,6 +5,7 @@ import 'dart:collection';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:r6_guide_app_firebase/MainPage.dart';
 import 'package:r6_guide_app_firebase/PatchNotes.dart';
 import 'package:r6_guide_app_firebase/SignUpScreen.dart';
@@ -88,6 +89,7 @@ class _MyAppState extends State<MyApp> {
                     height: 10,
                   ),
                   TextField(
+                    obscureText: true,
                     controller: tfKullaniciPsw,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), labelText: 'Password: '),

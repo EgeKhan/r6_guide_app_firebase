@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:r6_guide_app_firebase/admin/AdminOperatorsSayfasi.dart';
+import 'package:r6_guide_app_firebase/main.dart';
 
 import 'AdminUsersSayfasi.dart';
 
@@ -22,8 +23,13 @@ class _AdminPageScreenState extends State<AdminPageScreen> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back)),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                    (route) => false);
+              },
+              icon: const Icon(Icons.logout)),
           title: const Text('Admin Page'),
         ),
         body: Column(
