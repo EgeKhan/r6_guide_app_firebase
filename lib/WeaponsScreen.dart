@@ -3,6 +3,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:r6_guide_app_firebase/Weapons.dart';
+import 'package:r6_guide_app_firebase/WeaponsDetail.dart';
 
 class WeaponsScreen extends StatefulWidget {
   const WeaponsScreen({Key? key}) : super(key: key);
@@ -49,7 +50,11 @@ class _WeaponsScreenState extends State<WeaponsScreen> {
                   itemBuilder: (context, index) {
                     var weapons = weaponsListesi[index];
                     return GestureDetector(
-                      onTap: null,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WeaponDetailScreen()),
+                      ),
                       child: Card(
                         elevation: 20,
                         shadowColor: Colors.red,
