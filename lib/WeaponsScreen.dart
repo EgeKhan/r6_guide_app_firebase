@@ -53,7 +53,7 @@ class _WeaponsScreenState extends State<WeaponsScreen> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const WeaponDetailScreen()),
+                            builder: (context) =>  WeaponDetailScreen(weapons.damage,weapons.magazine,weapons.operators,weapons.rof,weapons.suppressedDamage,weapons.type,weapons.weaponName)),
                       ),
                       child: Card(
                         elevation: 20,
