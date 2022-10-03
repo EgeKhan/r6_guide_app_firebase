@@ -77,78 +77,88 @@ class _MyAppState extends State<MyApp> {
         body: Builder(
           builder: (context) {
             return Padding(
-              padding: const EdgeInsets.only(top: 300),
-              child: Column(
-                children: [
-                  TextField(
-                      controller: tfKullaniciAd,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Kullanıcı Adı: ')),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    obscureText: true,
-                    controller: tfKullaniciPsw,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Password: '),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    child: const Text('Kayıt Ol'),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SingUpScreen()),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        refUsers.onValue.listen(
-                          (event) {
-                            var gelenDegerler = event.snapshot.value as dynamic;
-                            if (gelenDegerler != null) {
-                              gelenDegerler.forEach(
-                                (key, nesne) {
-                                  var gelenKisi = Users.fromJson(key, nesne);
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      TextField(
+                          controller: tfKullaniciAd,
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Kullanıcı Adı: ')),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        obscureText: true,
+                        controller: tfKullaniciPsw,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password: '),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        child: const Text('Kayıt Ol'),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SingUpScreen()),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            refUsers.onValue.listen(
+                              (event) {
+                                var gelenDegerler =
+                                    event.snapshot.value as dynamic;
+                                if (gelenDegerler != null) {
+                                  gelenDegerler.forEach(
+                                    (key, nesne) {
+                                      var gelenKisi =
+                                          Users.fromJson(key, nesne);
 
-                                  if (gelenKisi.kullaniciAd ==
-                                          tfKullaniciAd.text &&
-                                      gelenKisi.kullaniciPsw ==
-                                          tfKullaniciPsw.text &&
-                                      gelenKisi.kullaniciType == "Admin") {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AdminPageScreen(),
-                                        ));
-                                  } else if (gelenKisi.kullaniciAd ==
-                                          tfKullaniciAd.text &&
-                                      gelenKisi.kullaniciPsw ==
-                                          tfKullaniciPsw.text &&
-                                      gelenKisi.kullaniciType == "User") {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const MainPage(),
-                                      ),
-                                    );
-                                  }
-                                },
-                              );
-                            }
+                                      if (gelenKisi.kullaniciAd ==
+                                              tfKullaniciAd.text &&
+                                          gelenKisi.kullaniciPsw ==
+                                              tfKullaniciPsw.text &&
+                                          gelenKisi.kullaniciType == "Admin") {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const AdminPageScreen(),
+                                            ));
+                                      } else if (gelenKisi.kullaniciAd ==
+                                              tfKullaniciAd.text &&
+                                          gelenKisi.kullaniciPsw ==
+                                              tfKullaniciPsw.text &&
+                                          gelenKisi.kullaniciType == "User") {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainPage(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  );
+                                }
+                              },
+                            );
                           },
-                        );
-                      },
-                      child: const Text('Giriş Yap'))
-                ],
+                          child: const Text('Giriş Yap'))
+                    ],
+                  ),
+                ),
               ),
             );
           },
