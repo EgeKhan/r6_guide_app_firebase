@@ -84,20 +84,23 @@ class _AdminPageScreenState extends State<AdminPageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.all(8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/images/operators.png',
-                        scale: 18,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Operators',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(
-                        width: 210,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/operators.png',
+                            scale: 18,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            'Operators',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
                       ),
                       IconButton(
                         onPressed: () {
@@ -125,20 +128,23 @@ class _AdminPageScreenState extends State<AdminPageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.all(8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/images/mp5.png',
-                        scale: 18,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Weapons',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(
-                        width: 215,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/mp5.png',
+                            scale: 18,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            'Weapons',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
                       ),
                       IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
                     ],
@@ -156,20 +162,23 @@ class _AdminPageScreenState extends State<AdminPageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.all(8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/images/maps.png',
-                        scale: 18,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Maps',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(
-                        width: 245,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/maps.png',
+                            scale: 18,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Text(
+                            'Maps',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
                       ),
                       IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
                     ],
