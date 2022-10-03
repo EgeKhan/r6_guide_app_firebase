@@ -44,17 +44,20 @@ class _AdminPageScreenState extends State<AdminPageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.all(8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.person, size: 30),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Users',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(
-                        width: 245,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.person, size: 30),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Users',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
                       ),
                       IconButton(
                         onPressed: () {
