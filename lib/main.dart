@@ -76,12 +76,13 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Builder(
           builder: (context) {
-            return Center(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       TextField(
                           controller: tfKullaniciAd,
